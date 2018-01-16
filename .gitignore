@@ -1,0 +1,5 @@
+Application/MDK-ARM/Objects/
+Application/MDK-ARM/Listings/
+*.uvgui*
+*.dep
+*.bak
