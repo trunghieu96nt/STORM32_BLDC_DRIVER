@@ -34,7 +34,6 @@
 /* Private variables ---------------------------------------------------------*/
 volatile uint32_t tick_count = 0; // for system
 volatile uint32_t u32_system_tick_count = 0; // for user
-volatile uint32_t tick_flag = 0;
 
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
@@ -138,7 +137,6 @@ void PendSV_Handler(void)
   */
 void SysTick_Handler(void)
 {
-  tick_flag = 1;
   tick_count++;
   u32_system_tick_count++;
 }
