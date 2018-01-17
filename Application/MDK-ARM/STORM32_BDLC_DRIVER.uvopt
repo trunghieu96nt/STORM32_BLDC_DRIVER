@@ -161,12 +161,7 @@
         <Ww>
           <count>0</count>
           <WinNumber>1</WinNumber>
-          <ItemText>au8_BLDC_rx</ItemText>
-        </Ww>
-        <Ww>
-          <count>1</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>au8_BLDC_frame</ItemText>
+          <ItemText>u32_ts_motor_0</ItemText>
         </Ww>
       </WatchWindow1>
       <Tracepoint>
@@ -215,10 +210,10 @@
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <Focus>0</Focus>
-      <ColumnNumber>0</ColumnNumber>
+      <ColumnNumber>52</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>54</TopLine>
-      <CurrentLine>62</CurrentLine>
+      <TopLine>137</TopLine>
+      <CurrentLine>36</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>..\src\stm32f10x_it.c</PathWithFileName>
       <FilenameWithoutPath>stm32f10x_it.c</FilenameWithoutPath>
@@ -247,10 +242,10 @@
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <Focus>0</Focus>
-      <ColumnNumber>30</ColumnNumber>
+      <ColumnNumber>8</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>122</TopLine>
-      <CurrentLine>134</CurrentLine>
+      <TopLine>86</TopLine>
+      <CurrentLine>98</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>..\src\main.c</PathWithFileName>
       <FilenameWithoutPath>main.c</FilenameWithoutPath>
@@ -279,10 +274,10 @@
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <Focus>0</Focus>
-      <ColumnNumber>0</ColumnNumber>
+      <ColumnNumber>10</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>0</TopLine>
-      <CurrentLine>0</CurrentLine>
+      <TopLine>163</TopLine>
+      <CurrentLine>177</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>..\src\motor_driver.c</PathWithFileName>
       <FilenameWithoutPath>motor_driver.c</FilenameWithoutPath>
@@ -293,12 +288,12 @@
       <GroupNumber>1</GroupNumber>
       <FileNumber>6</FileNumber>
       <FileType>1</FileType>
-      <tvExp>1</tvExp>
+      <tvExp>0</tvExp>
       <Focus>0</Focus>
-      <ColumnNumber>2</ColumnNumber>
+      <ColumnNumber>0</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>320</TopLine>
-      <CurrentLine>337</CurrentLine>
+      <TopLine>102</TopLine>
+      <CurrentLine>109</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>..\src\uart_comm.c</PathWithFileName>
       <FilenameWithoutPath>uart_comm.c</FilenameWithoutPath>

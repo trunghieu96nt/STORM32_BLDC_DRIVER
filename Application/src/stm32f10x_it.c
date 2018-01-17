@@ -33,7 +33,7 @@
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 volatile uint32_t tick_count = 0; // for system
-volatile uint32_t u32_system_tick_count = 0; // for user
+volatile uint32_t u32_tick_cnt_0 = 0, u32_tick_cnt_1 = 0; // for user
 
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
@@ -138,7 +138,8 @@ void PendSV_Handler(void)
 void SysTick_Handler(void)
 {
   tick_count++;
-  u32_system_tick_count++;
+  u32_tick_cnt_0++;
+  u32_tick_cnt_1++;
 }
 
 uint32_t SysTick_GetTick(void)
