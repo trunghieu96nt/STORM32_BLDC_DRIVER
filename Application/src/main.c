@@ -51,6 +51,7 @@ int main(void)
   /* Infinite loop */
   while (1)
   {
+    v_BLDC_Receive();
 //    if (u32_system_tick_count >= 100000)
 //    {
 //      u32_system_tick_count = 0;
@@ -125,6 +126,16 @@ void v_Board_Init(void)
   //v_PWM_Set(MOTOR_0, 0, 900, 1799);
   
   v_UART_Comm_Init();
+}
+
+bool bool_Set_BLDC_Speed_Handler(uint8_t u8_msg_id, uint8_t *pu8_payload, uint32_t u32_payload_cnt)
+{
+  
+//  au8_respond_payload[0] = *pu8_payload;
+//  au8_respond_payload[1] = 0x00; //Ok
+//  v_Send_Response(u8_msg_id, au8_respond_payload, 2);
+  v_Green_Toggle();
+  return true;
 }
 
 /**
