@@ -430,6 +430,11 @@
               <FileType>1</FileType>
               <FilePath>..\src\motor_driver.c</FilePath>
             </File>
+            <File>
+              <FileName>uart_comm.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\src\uart_comm.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -469,6 +474,16 @@
               <FileName>misc.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\Libraries\STM32F10x_StdPeriph_Driver\src\misc.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f10x_dma.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_dma.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f10x_usart.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_usart.c</FilePath>
             </File>
           </Files>
         </Group>

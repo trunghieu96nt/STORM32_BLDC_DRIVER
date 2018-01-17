@@ -31,7 +31,7 @@ static const uint16_t u16_svpwm_table[SVPWM_TABLE_SIZE] =
 static uint32_t u32_svpwm_cnt = 0;
 static uint32_t u32_svpwm_idx_A, u32_svpwm_idx_B, u32_svpwm_idx_C;
 uint16_t u16_svpwm_A, u16_svpwm_B, u16_svpwm_C;
-float flt_motor_hz = 1;
+float flt_motor_hz = 0.1;
 uint32_t u32_ts_us = 0;
 
 /* Private function prototypes -----------------------------------------------*/
@@ -66,14 +66,17 @@ int main(void)
       {
         u32_system_tick_count = 0;
         u32_svpwm_idx_A = u32_svpwm_cnt;
-        u32_svpwm_idx_B = (u32_svpwm_cnt + 240)%SVPWM_TABLE_SIZE; // SVPWM_TABLE_SIZE/3 = 333
-        u32_svpwm_idx_C = (u32_svpwm_cnt + 480)%SVPWM_TABLE_SIZE; // 2*SVPWM_TABLE_SIZE/3 = 667
+        u32_svpwm_idx_B = (u32_svpwm_cnt + 240)%SVPWM_TABLE_SIZE; // SVPWM_TABLE_SIZE/3
+        u32_svpwm_idx_C = (u32_svpwm_cnt + 480)%SVPWM_TABLE_SIZE; // 2*SVPWM_TABLE_SIZE/3
         u16_svpwm_A = u16_svpwm_table[u32_svpwm_idx_A];
         u16_svpwm_B = u16_svpwm_table[u32_svpwm_idx_B];
         u16_svpwm_C = u16_svpwm_table[u32_svpwm_idx_C];
         v_PWM_Set(MOTOR_0, u16_svpwm_table[u32_svpwm_idx_A], u16_svpwm_table[u32_svpwm_idx_B], u16_svpwm_table[u32_svpwm_idx_C]);
         if (u32_svpwm_cnt == 0)
+        {
           u32_svpwm_cnt = SVPWM_TABLE_SIZE - 1;
+          v_Red_Toggle();
+        }
         else 
           u32_svpwm_cnt--;
 //        if (u32_svpwm_cnt >= SVPWM_TABLE_SIZE)
@@ -120,6 +123,8 @@ void v_Board_Init(void)
   
   v_Motor_Init();
   //v_PWM_Set(MOTOR_0, 0, 900, 1799);
+  
+  v_UART_Comm_Init();
 }
 
 /**
