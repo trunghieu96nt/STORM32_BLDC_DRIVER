@@ -169,12 +169,12 @@ void v_PWM_Set(ENUM_MOTOR_T enum_motor,uint16_t u16_duty_A, uint32_t u16_duty_B,
           TIM3->CCR4 = u16_duty_A ;  
           TIM3->CCR3 = u16_duty_B; 
           TIM3->CCR2 = u16_duty_C;
-    break;
+          break;
     case MOTOR_1:
           TIM3->CCR1 = u16_duty_A ;  
           TIM2->CCR4 = u16_duty_B; 
           TIM2->CCR3 = u16_duty_C;
-    break;
+          break;
     default:
       break;
   }
