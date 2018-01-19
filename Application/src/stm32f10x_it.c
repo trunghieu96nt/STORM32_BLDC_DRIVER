@@ -152,6 +152,16 @@ bool SysTick_IsTimeout(uint32_t u32_start_time_ms, uint32_t u32_time_out_ms)
   return (tick_count - u32_start_time_ms > u32_time_out_ms * F_CTRL / 1000);
 }
 
+uint32_t u32_Tick_Cnt_0_Get(void)
+{
+  return u32_tick_cnt_0;
+}
+
+uint32_t u32_Tick_Cnt_1_Get(void)
+{
+  return u32_tick_cnt_1;
+}
+
 /******************************************************************************/
 /*                 STM32F10x Peripherals Interrupt Handlers                   */
 /*  Add here the Interrupt Handler for the used peripheral(s) (PPP), for the  */
