@@ -33,9 +33,11 @@ typedef enum
 /** @defgroup Motor Timer Define
   * @{
   */
-#define MINIMUM_TS                5000
-#define MOTOR_TIMER_IRQ_Handler   TIM5_IRQHandler
-#define FREQ_MOTOR_TIMER          1100
+#define MOTOR_0_TIM                 TIM5
+#define MOTOR_1_TIM                 TIM6
+#define MOTOR_0_TIMER_IRQ_Handler   TIM5_IRQHandler
+#define MOTOR_1_TIMER_IRQ_Handler   TIM6_IRQHandler
+#define FREQ_MOTOR_TIMER            1000000
 /**
   * @}
   */
