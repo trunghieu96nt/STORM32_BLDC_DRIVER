@@ -28,7 +28,7 @@
 /* Private variables ---------------------------------------------------------*/
 /* Private function prototypes -----------------------------------------------*/
 static void v_PWM_Init(void);
-//static void v_Motor_Timer_Init(void);
+static void v_Motor_Timer_Init(void);
 
 /* Private functions ---------------------------------------------------------*/
 
@@ -52,7 +52,7 @@ static void v_PWM_Init(void);
 void v_Motor_Init(void)
 {
   v_PWM_Init();
-  //v_Motor_Timer_Init();
+  v_Motor_Timer_Init();
 }
 /**
   * @}
@@ -105,8 +105,8 @@ void v_PWM_Init(void)
   
   
   /* Config TIM3 (CH4,CH3,CH2) for M0 */
-  TIM_TimeBaseStructure.TIM_Prescaler = 0; //36Hz
-  TIM_TimeBaseStructure.TIM_Period = 1800 - 1;   //20KHz
+  TIM_TimeBaseStructure.TIM_Prescaler = 0; //72MHz
+  TIM_TimeBaseStructure.TIM_Period = 2000 - 1;   //36KHz
   TIM_TimeBaseStructure.TIM_ClockDivision = 0;
   TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_CenterAligned1;
  
@@ -135,8 +135,8 @@ void v_PWM_Init(void)
   
   /* Config TIM3 (CH1) && TIM2 (CH4,CH3) for M1 */
   
-  TIM_TimeBaseStructure.TIM_Prescaler = 0; //36MHz
-  TIM_TimeBaseStructure.TIM_Period = 1800 - 1;   //20KHz
+  TIM_TimeBaseStructure.TIM_Prescaler = 0; //72MHz
+  TIM_TimeBaseStructure.TIM_Period = 2000 - 1;   //36KHz
   TIM_TimeBaseStructure.TIM_ClockDivision = 0;
   TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_CenterAligned1;
   
@@ -200,23 +200,47 @@ void v_Motor_Timer_Init(void)
   TIM_TimeBaseInitTypeDef   TIM_TimeBaseStructure;
   NVIC_InitTypeDef          NVIC_InitStructure;
   
+  /* MOTOR_0 */
   /* Enable Clock */
   RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM5, ENABLE);
    
- /* Time base configuration */
- TIM_TimeBaseStructure.TIM_Prescaler = 9 - 1; //4MHz
- TIM_TimeBaseStructure.TIM_Period = 800 - 1; //5KHz - 0.2ms
- TIM_TimeBaseStructure.TIM_ClockDivision = 0;
- TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;
- TIM_TimeBaseInit(TIM5, &TIM_TimeBaseStructure);
- TIM_ITConfig(TIM5, TIM_IT_Update, ENABLE);
- TIM_Cmd(TIM4, ENABLE);
- 
- NVIC_InitStructure.NVIC_IRQChannel = TIM5_IRQn;
- NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
- NVIC_InitStructure.NVIC_IRQChannelSubPriority = 1;
- NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
- NVIC_Init(&NVIC_InitStructure);   
+  /* Time base configuration */
+  TIM_TimeBaseStructure.TIM_Prescaler = (uint16_t)(SystemCoreClock / FREQ_MOTOR_TIMER) - 1;
+  TIM_TimeBaseStructure.TIM_Period = 0xFFFF; //maximum
+  TIM_TimeBaseStructure.TIM_ClockDivision = 0;
+  TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;
+  TIM_TimeBaseInit(MOTOR_0_TIM, &TIM_TimeBaseStructure);
+  TIM_ITConfig(MOTOR_0_TIM, TIM_IT_Update, ENABLE);
+  TIM_ClearITPendingBit(MOTOR_0_TIM, 0xFF); //Clear all interrupt flag
+  TIM_ARRPreloadConfig(MOTOR_0_TIM, DISABLE);
+  TIM_Cmd(MOTOR_0_TIM, ENABLE);
+  
+  NVIC_InitStructure.NVIC_IRQChannel = TIM5_IRQn;
+  NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
+  NVIC_InitStructure.NVIC_IRQChannelSubPriority = 1;
+  NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+  NVIC_Init(&NVIC_InitStructure);
+  
+  /* MOTOR_1 */
+  /* Enable Clock */
+  RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM6, ENABLE);
+   
+  /* Time base configuration */
+  TIM_TimeBaseStructure.TIM_Prescaler = (uint16_t)(SystemCoreClock / FREQ_MOTOR_TIMER) - 1;
+  TIM_TimeBaseStructure.TIM_Period = 0xFFFF; //maximum
+  TIM_TimeBaseStructure.TIM_ClockDivision = 0;
+  TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;
+  TIM_TimeBaseInit(MOTOR_1_TIM, &TIM_TimeBaseStructure);
+  TIM_ITConfig(MOTOR_1_TIM, TIM_IT_Update, ENABLE);
+  TIM_ClearITPendingBit(MOTOR_1_TIM, 0xFF); //Clear all interrupt flag
+  TIM_ARRPreloadConfig(MOTOR_1_TIM, DISABLE);
+  TIM_Cmd(MOTOR_1_TIM, ENABLE);
+  
+  NVIC_InitStructure.NVIC_IRQChannel = TIM6_IRQn;
+  NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
+  NVIC_InitStructure.NVIC_IRQChannelSubPriority = 1;
+  NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+  NVIC_Init(&NVIC_InitStructure);
 }
 /**
   * @}

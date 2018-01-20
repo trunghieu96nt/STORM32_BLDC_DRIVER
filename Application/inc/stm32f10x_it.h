@@ -33,7 +33,7 @@
 
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
-#define F_CTRL 100000.0f //10us
+#define F_CTRL 200000.0f //10us
 
 /* Exported macro ------------------------------------------------------------*/
 /* Exported functions ------------------------------------------------------- */
@@ -50,6 +50,8 @@ void SysTick_Handler(void);
 
 uint32_t SysTick_GetTick(void);
 bool SysTick_IsTimeout(uint32_t u32_start_time_ms, uint32_t u32_time_out_ms);
+uint32_t u32_Tick_Cnt_0_Get(void);
+uint32_t u32_Tick_Cnt_1_Get(void);
 
 #ifdef __cplusplus
 }
