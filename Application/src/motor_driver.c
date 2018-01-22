@@ -28,7 +28,7 @@
 /* Private variables ---------------------------------------------------------*/
 /* Private function prototypes -----------------------------------------------*/
 static void v_PWM_Init(void);
-static void v_Motor_Timer_Init(void);
+void v_Motor_Timer_Init(void);
 
 /* Private functions ---------------------------------------------------------*/
 
@@ -52,7 +52,7 @@ static void v_Motor_Timer_Init(void);
 void v_Motor_Init(void)
 {
   v_PWM_Init();
-  v_Motor_Timer_Init();
+  //v_Motor_Timer_Init();
 }
 /**
   * @}

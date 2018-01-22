@@ -21,7 +21,9 @@
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 #define SVPWM_TABLE_SIZE    720
-#define SPEED_CONVERT       231481.48148148150f//1000000/SVPWM_TABLE_SIZE/6*1000
+#define SPEED_CONVERT       19841.269841269842f//1000000/SVPWM_TABLE_SIZE/7*100
+//#define SPEED_CONVERT       23148.148148148150f//1000000/SVPWM_TABLE_SIZE/6*100
+
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 static const uint16_t u16_svpwm_table_A[SVPWM_TABLE_SIZE] = 
@@ -122,49 +124,54 @@ static void v_Set_BLDC_Speed(ENUM_MOTOR_T enum_motor, int32_t s32_speed)
   
   switch (enum_motor)
   {
-    case MOTOR_0: 
-      if (s32_speed == 0)
-      {
-        s32_svpwm_inc_0  = 0;
-        TIM_SetAutoreload(MOTOR_0_TIM, 0xFFFF);
-      }
-      else
-      {
-        if (s32_speed > 0) s32_svpwm_inc_0 = 1;
-        else
-        {
-          s32_speed = -s32_speed;
-          s32_svpwm_inc_0 = -1;
-        }
-        
+    case MOTOR_0:
+      v_PWM_Set(MOTOR_0, u16_svpwm_table_A[s32_speed],
+             u16_svpwm_table_A[(s32_speed + 240) % SVPWM_TABLE_SIZE],
+             u16_svpwm_table_A[(s32_speed + 480) % SVPWM_TABLE_SIZE]);
+//      if (s32_speed == 0)
+//      {
+//        s32_svpwm_inc_0  = 0;
+//        TIM_SetAutoreload(MOTOR_0_TIM, 0xFFFF);
+//      }
+//      else
+//      {
+//        if (s32_speed > 0) s32_svpwm_inc_0 = 1;
+//        else
+//        {
+//          s32_speed = -s32_speed;
+//          s32_svpwm_inc_0 = -1;
+//        }
         /* Calculate ts in us */
-        u32_ts_motor = (uint32_t)(SPEED_CONVERT / (float)s32_speed);
-        if (u32_ts_motor > 0xFFFF) u32_ts_motor = 0xFFFF;
-        TIM_SetAutoreload(MOTOR_0_TIM, (uint16_t)u32_ts_motor);
-        if (MOTOR_0_TIM->ARR <= MOTOR_0_TIM->CNT) MOTOR_0_TIM->CNT = 0;
-      }
+//        u32_ts_motor = (uint32_t)(SPEED_CONVERT / (float)s32_speed);
+//        if (u32_ts_motor > 0xFFFF) u32_ts_motor = 0xFFFF;
+//        TIM_SetAutoreload(MOTOR_0_TIM, (uint16_t)u32_ts_motor);
+//        if (MOTOR_0_TIM->ARR <= MOTOR_0_TIM->CNT) MOTOR_0_TIM->CNT = 0;
+//      }
       break;
     case MOTOR_1:
-      if (s32_speed == 0)
-      {
-        s32_svpwm_inc_1  = 0;
-        TIM_SetAutoreload(MOTOR_1_TIM, 0xFFFF);
-      }
-      else
-      {
-        if (s32_speed > 0) s32_svpwm_inc_1 = 1;
-        else
-        {
-          s32_speed = -s32_speed;
-          s32_svpwm_inc_1 = -1;
-        }
+      v_PWM_Set(MOTOR_1, u16_svpwm_table_A[s32_speed],
+                u16_svpwm_table_A[(s32_speed + 240) % SVPWM_TABLE_SIZE],
+                u16_svpwm_table_A[(s32_speed + 480) % SVPWM_TABLE_SIZE]);
+//      if (s32_speed == 0)
+//      {
+//        s32_svpwm_inc_1  = 0;
+//        TIM_SetAutoreload(MOTOR_1_TIM, 0xFFFF);
+//      }
+//      else
+//      {
+//        if (s32_speed > 0) s32_svpwm_inc_1 = 1;
+//        else
+//        {
+//          s32_speed = -s32_speed;
+//          s32_svpwm_inc_1 = -1;
+//        }
         
         /* Calculate ts in us */
-        u32_ts_motor = (uint32_t)(SPEED_CONVERT / (float)s32_speed);
-        if (u32_ts_motor > 0xFFFF) u32_ts_motor = 0xFFFF;
-        TIM_SetAutoreload(MOTOR_1_TIM, (uint16_t)u32_ts_motor);
-        if (MOTOR_1_TIM->ARR <= MOTOR_1_TIM->CNT) MOTOR_1_TIM->CNT = 0;
-      }
+//        u32_ts_motor = (uint32_t)(SPEED_CONVERT / (float)s32_speed);
+//        if (u32_ts_motor > 0xFFFF) u32_ts_motor = 0xFFFF;
+//        TIM_SetAutoreload(MOTOR_1_TIM, (uint16_t)u32_ts_motor);
+//        if (MOTOR_1_TIM->ARR <= MOTOR_1_TIM->CNT) MOTOR_1_TIM->CNT = 0;
+//      }
       break;
     default:
       break;
